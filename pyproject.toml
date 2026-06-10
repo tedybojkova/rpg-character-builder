@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "rpg-character-builder"
+version = "1.0.0"
+description = "A production-grade RPG character builder REST API"
+requires-python = ">=3.11"
+authors = [{ name = "Teodora Bozhkova", email = "bojkovatedy@gmail.com" }]
+readme = "README.md"
+
+dependencies = [
+    "flask>=3.0",
+    "flask-sqlalchemy>=3.1",
+    "streamlit>=1.35",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pylint>=3.2",
+    "mypy>=1.10",
+    "black>=24.0",
+    "sphinx>=7.0",
+    "sphinx-rtd-theme>=2.0",
+]
+
+[project.scripts]
+rpg-api = "run:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=app --cov-report=term-missing"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pylint.messages_control]
+disable = ["C0114", "R0903"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
