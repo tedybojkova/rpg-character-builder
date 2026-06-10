@@ -151,11 +151,7 @@ elif page == "Create Character":
     cls = class_map[chosen_class]
     bonuses = {k: v for k, v in race["bonuses"].items() if v != 0}
 
-    if st.button("Roll Random Stats"):
-        rolled = api_get("/characters/roll")
-        if rolled:
-            for stat, value in rolled.items():
-                st.session_state[f"stat_{stat}"] = value
+
 
     stat_names = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
     stat_values = {}
