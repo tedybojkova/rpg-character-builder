@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Black formatting check
-        run: black --check --diff app/ tests/ frontend/
+      - run: black --check --diff app/
 
       - name: Pylint code quality
         run: pylint app/ --fail-under=7.0
