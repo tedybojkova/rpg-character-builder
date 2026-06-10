@@ -11,9 +11,9 @@ def client():
 
 
 VALID_CHARACTER = {
-    "name": "Thorin",
-    "class_name": "Warrior",
-    "race_name": "Dwarf",
+    "name": "Zoro",
+    "class_name": "Swordsman",
+    "race_name": "Human",
     "level": 1,
     "strength": 16,
     "dexterity": 10,
@@ -65,7 +65,7 @@ class TestCreateCharacter:
     def test_create_returns_correct_name(self, client):
         response = client.post("/characters/", json=VALID_CHARACTER)
         data = response.get_json()
-        assert data["name"] == "Thorin"
+        assert data["name"] == "Zoro"
 
     def test_create_has_computed_stats(self, client):
         response = client.post("/characters/", json=VALID_CHARACTER)
@@ -106,9 +106,12 @@ class TestGetUpdateDelete:
 
     def test_update_character_name(self, client):
         char_id = self._create(client)
-        response = client.put(f"/characters/{char_id}", json={"name": "Thorin Oakenshield"})
+        response = client.put(
+            f"/characters/{char_id}",
+            json={"name": "Roronoa Zoro"}
+        )
         assert response.status_code == 200
-        assert response.get_json()["name"] == "Thorin Oakenshield"
+        assert response.get_json()["name"] == "Roronoa Zoro"
 
     def test_delete_character(self, client):
         char_id = self._create(client)
@@ -123,7 +126,8 @@ class TestRollStats:
     def test_roll_returns_six_stats(self, client):
         response = client.get("/characters/roll")
         data = response.get_json()
-        expected = {"strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"}
+        expected = {"strength", "dexterity", "constitution",
+                    "intelligence", "wisdom", "charisma"}
         assert set(data.keys()) == expected
 
     def test_rolled_stats_in_valid_range(self, client):

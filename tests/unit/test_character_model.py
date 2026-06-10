@@ -15,7 +15,7 @@ def app():
 
 @pytest.fixture
 def warrior_class(app):
-    return CharacterClass.query.filter_by(name="Warrior").first()
+    return CharacterClass.query.filter_by(name="Swordsman").first()
 
 
 @pytest.fixture
@@ -26,7 +26,7 @@ def human_race(app):
 @pytest.fixture
 def sample_character(app, warrior_class, human_race):
     character = Character(
-        name="Test Warrior",
+        name="Test Swordsman",
         level=1,
         class_id=warrior_class.id,
         race_id=human_race.id,
@@ -77,19 +77,12 @@ class TestArmourClass:
 
 class TestProficiencyBonus:
 
-    @pytest.mark.parametrize(
-        "level,expected",
-        [
-            (1, 2),
-            (4, 2),
-            (5, 3),
-            (8, 3),
-            (9, 4),
-            (12, 4),
-            (17, 6),
-            (20, 6),
-        ],
-    )
+    @pytest.mark.parametrize("level,expected", [
+        (1, 2), (4, 2),
+        (5, 3), (8, 3),
+        (9, 4), (12, 4),
+        (17, 6), (20, 6),
+    ])
     def test_proficiency_bonus(self, sample_character, level, expected):
         sample_character.level = level
         assert sample_character.proficiency_bonus == expected
