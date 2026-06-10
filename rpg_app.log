@@ -37323,3 +37323,178 @@
 2026-06-10 20:18:38 | INFO     | app.services.dice_roller | Rolled stat array: [15, 10, 14, 13, 11, 7]
 2026-06-10 20:18:38 | INFO     | app.services.dice_roller | Rolled stat array: [15, 10, 14, 13, 11, 7]
 2026-06-10 20:18:38 | INFO     | app.services.dice_roller | Rolled stat array: [15, 10, 14, 13, 11, 7]
+2026-06-10 20:27:34 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:27:34 | INFO     | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:27:34 | INFO     | werkzeug | [33mPress CTRL+C to quit[0m
+2026-06-10 20:27:34 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:27:34 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:27:34 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:27:34 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:27:52 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\streamlit\\env_util.py', reloading
+2026-06-10 20:27:52 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:27:53 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:27:53 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:27:53 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:27:54 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\flask\\app.py', reloading
+2026-06-10 20:27:54 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:27:55 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:27:55 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:27:55 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:28:20 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\sqlalchemy\\orm\\session.py', reloading
+2026-06-10 20:28:20 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:28:21 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:28:21 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:28:21 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:30:07 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:30:07 | INFO     | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:30:07 | INFO     | werkzeug | [33mPress CTRL+C to quit[0m
+2026-06-10 20:30:07 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:30:07 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:30:07 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:30:07 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:30:56 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\sqlalchemy\\sql\\elements.py', reloading
+2026-06-10 20:30:57 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:30:57 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:30:57 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:30:57 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:32:03 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:32:03 | INFO     | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:32:03 | INFO     | werkzeug | [33mPress CTRL+C to quit[0m
+2026-06-10 20:32:03 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:32:03 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:32:03 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:32:03 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:32:20 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:32:20] "[35m[1mGET /characters/ HTTP/1.1[0m" 500 -
+2026-06-10 20:33:54 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:33:54 | INFO     | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:33:54 | INFO     | werkzeug | [33mPress CTRL+C to quit[0m
+2026-06-10 20:33:54 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:33:55 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:33:55 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:33:55 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:34:05 | INFO     | app.services.character_service | Retrieved 0 characters.
+2026-06-10 20:34:05 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:05] "GET /characters/ HTTP/1.1" 200 -
+2026-06-10 20:34:15 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:34:15 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:15] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:34:17 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:34:17 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:17] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:34:24 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:34:24 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:24] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:34:26 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:34:26 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:26] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:34:26 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:34:26 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:26] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:34:28 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:34:28 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:28] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:34:42 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:34:42 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:42] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:34:42 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:34:42 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:42] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:34:44 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:34:44 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:44] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:34:45 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:34:45 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:34:45] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:35:28 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:35:28 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:35:28] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:35:30 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:35:30 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:35:30] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:35:48 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:35:48 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:35:48] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:35:50 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:35:50 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:35:50] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:38:48 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\streamlit\\elements\\lib\\mutable_tab_container.py', reloading
+2026-06-10 20:38:48 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:38:49 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:38:49 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:38:49 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:38:52 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\venv\\Scripts\\python.exe\\Lib\\site-packages\\streamlit\\type_util.py', reloading
+2026-06-10 20:38:52 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:38:53 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:38:53 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:38:53 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:39:51 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\frontend\\app.py', reloading
+2026-06-10 20:39:51 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:39:51 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:39:51 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:39:51 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:41:16 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\frontend\\app.py', reloading
+2026-06-10 20:41:16 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:41:17 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:41:17 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:41:17 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
+2026-06-10 20:42:12 | INFO     | app.services.character_service | Retrieved 0 characters.
+2026-06-10 20:42:12 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:12] "GET /characters/ HTTP/1.1" 200 -
+2026-06-10 20:42:17 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:42:17 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:17] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:42:19 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:42:19 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:19] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:42:36 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:42:36 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:36] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:42:38 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:42:38 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:38] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:42:45 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:42:45 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:45] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:42:48 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:42:48 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:48] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:42:51 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:42:51 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:51] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:42:53 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:42:53 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:42:53] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:00 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:00 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:00] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:02 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:02 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:02] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[2, 3, 3, 4], total=10
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[2, 5, 6, 6], total=17
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[1, 3, 4, 5], total=12
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[2, 2, 3, 6], total=11
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[2, 2, 3, 6], total=11
+2026-06-10 20:43:04 | DEBUG    | app.services.dice_roller | Rolled 4d6 drop lowest: rolls=[1, 3, 4, 6], total=13
+2026-06-10 20:43:04 | INFO     | app.services.dice_roller | Rolled stat array: [10, 17, 12, 11, 11, 13]
+2026-06-10 20:43:04 | INFO     | app.routes.characters | Rolled stats: {'strength': 10, 'dexterity': 17, 'constitution': 12, 'intelligence': 11, 'wisdom': 11, 'charisma': 13}
+2026-06-10 20:43:04 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:04] "GET /characters/roll HTTP/1.1" 200 -
+2026-06-10 20:43:18 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:18 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:18] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:19 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:19 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:19] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:20 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:20 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:20] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:21 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:21 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:21] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:32 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:32 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:32] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:32 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:32 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:32] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:33 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:33 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:33] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:34 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:34 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:34] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:34 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:34 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:34] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:35 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:35 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:35] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:44 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:44 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:44] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:46 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:46 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:46] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:51 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:51 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:51] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:53 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:53 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:53] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:43:57 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:43:57 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:57] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:43:59 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:43:59 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:43:59] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:44:04 | INFO     | app.routes.classes | Retrieved 12 classes.
+2026-06-10 20:44:04 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:44:04] "GET /classes/ HTTP/1.1" 200 -
+2026-06-10 20:44:06 | INFO     | app.routes.races | Retrieved 10 races.
+2026-06-10 20:44:06 | INFO     | werkzeug | 127.0.0.1 - - [10/Jun/2026 20:44:06] "GET /races/ HTTP/1.1" 200 -
+2026-06-10 20:53:59 | INFO     | werkzeug |  * Detected change in 'C:\\Users\\bojko\\Desktop\\rpg_character_builder\\frontend\\app.py', reloading
+2026-06-10 20:53:59 | INFO     | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-06-10 20:54:00 | INFO     | app | Setting sail on the Grand Line...
+2026-06-10 20:54:00 | WARNING  | werkzeug |  * Debugger is active!
+2026-06-10 20:54:00 | INFO     | werkzeug |  * Debugger PIN: 504-257-608
