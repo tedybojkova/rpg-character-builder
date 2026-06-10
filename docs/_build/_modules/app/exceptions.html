@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>app.exceptions &#8212; Grand Line Character Builder 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for app.exceptions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Custom exception classes for the Grand Line Character Builder API.</span>
+
+<span class="sd">All exceptions inherit from RPGBaseException so callers can catch</span>
+<span class="sd">either specific errors or all application errors with one handler.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="RPGBaseException">
+<a class="viewcode-back" href="../../app.html#app.exceptions.RPGBaseException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RPGBaseException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception class for all Grand Line Character Builder errors.</span>
+
+<span class="sd">    All custom exceptions in this application inherit from this class,</span>
+<span class="sd">    allowing routes to catch any application error with a single except.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="CharacterNotFoundException">
+<a class="viewcode-back" href="../../app.html#app.exceptions.CharacterNotFoundException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CharacterNotFoundException</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a character cannot be found in the database.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        character_id: The ID that was not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">character_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the missing character ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            character_id: The ID of the character that was not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">character_id</span> <span class="o">=</span> <span class="n">character_id</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Character with ID </span><span class="si">{</span><span class="n">character_id</span><span class="si">}</span><span class="s2"> was not found.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ClassNotFoundException">
+<a class="viewcode-back" href="../../app.html#app.exceptions.ClassNotFoundException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClassNotFoundException</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a character class name does not exist in the database.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        class_name: The class name that was not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the missing class name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            class_name: The name of the class that was not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_name</span> <span class="o">=</span> <span class="n">class_name</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Character class &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; was not found.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="RaceNotFoundException">
+<a class="viewcode-back" href="../../app.html#app.exceptions.RaceNotFoundException">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RaceNotFoundException</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a race name does not exist in the database.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        race_name: The race name that was not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">race_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the missing race name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            race_name: The name of the race that was not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">race_name</span> <span class="o">=</span> <span class="n">race_name</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Race &#39;</span><span class="si">{</span><span class="n">race_name</span><span class="si">}</span><span class="s2">&#39; was not found.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidStatValueError">
+<a class="viewcode-back" href="../../app.html#app.exceptions.InvalidStatValueError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InvalidStatValueError</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a stat value is outside the allowed range of 1 to 20.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        stat_name: The name of the invalid stat.</span>
+<span class="sd">        value: The invalid value that was provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the stat name and invalid value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stat_name: The name of the stat that failed validation.</span>
+<span class="sd">            value: The value that was out of range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat_name</span> <span class="o">=</span> <span class="n">stat_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> for &#39;</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">&#39;. Must be between 1 and 20.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidCharacterNameError">
+<a class="viewcode-back" href="../../app.html#app.exceptions.InvalidCharacterNameError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InvalidCharacterNameError</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a character name is empty or exceeds 50 characters.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name: The invalid name that was provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the invalid name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name that failed validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid name &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;. Must be 1 to 50 characters.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InvalidLevelError">
+<a class="viewcode-back" href="../../app.html#app.exceptions.InvalidLevelError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InvalidLevelError</span><span class="p">(</span><span class="n">RPGBaseException</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when a character level is outside the allowed range of 1 to 20.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        level: The invalid level that was provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise with the invalid level.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            level: The level value that was out of range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">. Must be between 1 and 20.&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Grand Line Character Builder</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../app.html">app</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Teodora Bozhkova.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

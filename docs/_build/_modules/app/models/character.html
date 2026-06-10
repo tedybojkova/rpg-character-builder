@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>app.models.character &#8212; Grand Line Character Builder 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for app.models.character</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>
+
+
+<div class="viewcode-block" id="Character">
+<a class="viewcode-back" href="../../../app.models.html#app.models.character.Character">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a pirate character in the Grand Line world.</span>
+
+<span class="sd">    Characters have a class, a race, six core stats, and computed</span>
+<span class="sd">    properties for HP, armour class, and proficiency bonus. Each</span>
+<span class="sd">    character also has a bounty in Berry.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id: Primary key.</span>
+<span class="sd">        name: Character name, max 50 characters.</span>
+<span class="sd">        level: Character level between 1 and 20.</span>
+<span class="sd">        backstory: Optional character history text.</span>
+<span class="sd">        bounty: The character&#39;s bounty in Berry, default 0.</span>
+<span class="sd">        class_id: Foreign key to CharacterClass.</span>
+<span class="sd">        race_id: Foreign key to Race.</span>
+<span class="sd">        strength: Base strength stat.</span>
+<span class="sd">        dexterity: Base dexterity stat.</span>
+<span class="sd">        constitution: Base constitution stat.</span>
+<span class="sd">        intelligence: Base intelligence stat.</span>
+<span class="sd">        wisdom: Base wisdom stat.</span>
+<span class="sd">        charisma: Base charisma stat.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;characters&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">backstory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;A pirate sailing the Grand Line in search of the One Piece.&quot;</span><span class="p">)</span>
+    <span class="n">bounty</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">class_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">race_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">strength</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">dexterity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">constitution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">intelligence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">wisdom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">charisma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">character_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the associated CharacterClass object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CharacterClass: The class linked to this character.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.character_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">CharacterClass</span>
+        <span class="k">return</span> <span class="n">CharacterClass</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">class_id</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">race</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve the associated Race object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Race: The race linked to this character.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.race</span><span class="w"> </span><span class="kn">import</span> <span class="n">Race</span>
+        <span class="k">return</span> <span class="n">Race</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">race_id</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">strength_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate strength modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The strength modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">strength</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">strength_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dexterity_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate dexterity modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The dexterity modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dexterity</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">dexterity_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">constitution_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate constitution modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The constitution modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constitution</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">constitution_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intelligence_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate intelligence modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The intelligence modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">intelligence</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">intelligence_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wisdom_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate wisdom modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The wisdom modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wisdom</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">wisdom_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">charisma_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate charisma modifier including race bonus.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The charisma modifier value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charisma</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">charisma_bonus</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max_hit_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate maximum hit points based on class hit die, constitution, and level.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The maximum HP value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">character_class</span><span class="o">.</span><span class="n">hit_die</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">constitution_modifier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hp</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">armour_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate armour class as 10 plus dexterity modifier.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The armour class value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">10</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dexterity_modifier</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proficiency_bonus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate proficiency bonus based on character level.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The proficiency bonus value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bounty_with_level</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate total bounty including a level bonus.</span>
+
+<span class="sd">        Each level above 1 adds 10% of the base bounty on top.</span>
+<span class="sd">        A level 10 character with 1,000,000 Berry base bounty</span>
+<span class="sd">        would have 1,900,000 Berry total.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The total bounty including level scaling.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">level_multiplier</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.10</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounty</span> <span class="o">*</span> <span class="n">level_multiplier</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Character.to_dict">
+<a class="viewcode-back" href="../../../app.models.html#app.models.character.Character.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the character to a dictionary for API responses.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Full character data including stats, computed values,</span>
+<span class="sd">                bounty, and backstory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">,</span>
+            <span class="s2">&quot;backstory&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">backstory</span><span class="p">,</span>
+            <span class="s2">&quot;bounty&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounty</span><span class="p">,</span>
+            <span class="s2">&quot;bounty_with_level&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bounty_with_level</span><span class="p">,</span>
+            <span class="s2">&quot;character_class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">character_class</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;race&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;strength&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strength</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strength_modifier</span><span class="p">},</span>
+                <span class="s2">&quot;dexterity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dexterity</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dexterity_modifier</span><span class="p">},</span>
+                <span class="s2">&quot;constitution&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">constitution</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">constitution_modifier</span><span class="p">},</span>
+                <span class="s2">&quot;intelligence&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">intelligence</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">intelligence_modifier</span><span class="p">},</span>
+                <span class="s2">&quot;wisdom&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">wisdom</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">wisdom_modifier</span><span class="p">},</span>
+                <span class="s2">&quot;charisma&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">charisma</span><span class="p">,</span> <span class="s2">&quot;modifier&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">charisma_modifier</span><span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;computed&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;max_hit_points&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hit_points</span><span class="p">,</span>
+                <span class="s2">&quot;armour_class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">armour_class</span><span class="p">,</span>
+                <span class="s2">&quot;proficiency_bonus&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">proficiency_bonus</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a developer-friendly string representation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: String showing character name and level.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;Character </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Grand Line Character Builder</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../../app.html">app</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Teodora Bozhkova.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>app.services.character_service &#8212; Grand Line Character Builder 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for app.services.character_service</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..models.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..models.character</span><span class="w"> </span><span class="kn">import</span> <span class="n">Character</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..models.character_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">CharacterClass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..models.race</span><span class="w"> </span><span class="kn">import</span> <span class="n">Race</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CharacterNotFoundException</span><span class="p">,</span>
+    <span class="n">ClassNotFoundException</span><span class="p">,</span>
+    <span class="n">RaceNotFoundException</span><span class="p">,</span>
+    <span class="n">InvalidStatValueError</span><span class="p">,</span>
+    <span class="n">InvalidCharacterNameError</span><span class="p">,</span>
+    <span class="n">InvalidLevelError</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">MIN_STAT</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">MAX_STAT</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">MIN_LEVEL</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">MAX_LEVEL</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">MAX_NAME_LENGTH</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">MAX_BOUNTY</span> <span class="o">=</span> <span class="mi">5_000_000_000</span>
+
+
+<div class="viewcode-block" id="CharacterService">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CharacterService</span><span class="p">:</span>
+
+<div class="viewcode-block" id="CharacterService.get_all">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService.get_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Character</span><span class="p">]:</span>
+        <span class="n">characters</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Retrieved </span><span class="si">%d</span><span class="s2"> characters.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">characters</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">characters</span></div>
+
+
+<div class="viewcode-block" id="CharacterService.get_by_id">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService.get_by_id">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">character_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Character</span><span class="p">:</span>
+        <span class="n">character</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">character</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Character ID </span><span class="si">%d</span><span class="s2"> not found.&quot;</span><span class="p">,</span> <span class="n">character_id</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">CharacterNotFoundException</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">character</span></div>
+
+
+<div class="viewcode-block" id="CharacterService.create">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService.create">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Character</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Creating character: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_level</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="n">class_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;class_name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">character_class</span> <span class="o">=</span> <span class="n">CharacterClass</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">class_name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">character_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ClassNotFoundException</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+
+        <span class="n">race_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;race_name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">race</span> <span class="o">=</span> <span class="n">Race</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">race_name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">race</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RaceNotFoundException</span><span class="p">(</span><span class="n">race_name</span><span class="p">)</span>
+
+        <span class="n">stat_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="s2">&quot;dexterity&quot;</span><span class="p">,</span> <span class="s2">&quot;constitution&quot;</span><span class="p">,</span> <span class="s2">&quot;intelligence&quot;</span><span class="p">,</span> <span class="s2">&quot;wisdom&quot;</span><span class="p">,</span> <span class="s2">&quot;charisma&quot;</span><span class="p">]</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">stat_names</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_stat</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="n">stats</span><span class="p">[</span><span class="n">stat</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">bounty</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bounty&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_bounty</span><span class="p">(</span><span class="n">bounty</span><span class="p">)</span>
+
+        <span class="n">character</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+            <span class="n">class_id</span><span class="o">=</span><span class="n">character_class</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">race_id</span><span class="o">=</span><span class="n">race</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">backstory</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;backstory&quot;</span><span class="p">,</span> <span class="s2">&quot;A pirate sailing the Grand Line in search of the One Piece.&quot;</span><span class="p">),</span>
+            <span class="n">bounty</span><span class="o">=</span><span class="n">bounty</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">stats</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Character created: </span><span class="si">%s</span><span class="s2"> (ID=</span><span class="si">%d</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">character</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">character</span></div>
+
+
+<div class="viewcode-block" id="CharacterService.update">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">character_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Character</span><span class="p">:</span>
+        <span class="n">character</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_name</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">character</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="s2">&quot;level&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_level</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">]))</span>
+            <span class="n">character</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="s2">&quot;backstory&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">character</span><span class="o">.</span><span class="n">backstory</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;backstory&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;bounty&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">bounty</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;bounty&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_bounty</span><span class="p">(</span><span class="n">bounty</span><span class="p">)</span>
+            <span class="n">character</span><span class="o">.</span><span class="n">bounty</span> <span class="o">=</span> <span class="n">bounty</span>
+
+        <span class="k">for</span> <span class="n">stat</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;strength&quot;</span><span class="p">,</span> <span class="s2">&quot;dexterity&quot;</span><span class="p">,</span> <span class="s2">&quot;constitution&quot;</span><span class="p">,</span> <span class="s2">&quot;intelligence&quot;</span><span class="p">,</span> <span class="s2">&quot;wisdom&quot;</span><span class="p">,</span> <span class="s2">&quot;charisma&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">stat</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_validate_stat</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">character</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Character ID </span><span class="si">%d</span><span class="s2"> updated.&quot;</span><span class="p">,</span> <span class="n">character_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">character</span></div>
+
+
+<div class="viewcode-block" id="CharacterService.delete">
+<a class="viewcode-back" href="../../../app.services.html#app.services.character_service.CharacterService.delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">character_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">character</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">character_id</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Character ID </span><span class="si">%d</span><span class="s2"> deleted.&quot;</span><span class="p">,</span> <span class="n">character_id</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_NAME_LENGTH</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidCharacterNameError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_stat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">MIN_STAT</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">MAX_STAT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidStatValueError</span><span class="p">(</span><span class="n">stat_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">MIN_LEVEL</span> <span class="o">&lt;=</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">MAX_LEVEL</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidLevelError</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_bounty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bounty</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">bounty</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">bounty</span> <span class="o">&gt;</span> <span class="n">MAX_BOUNTY</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bounty must be between 0 and </span><span class="si">{</span><span class="n">MAX_BOUNTY</span><span class="si">}</span><span class="s2"> Berry.&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Grand Line Character Builder</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../../app.html">app</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Teodora Bozhkova.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
