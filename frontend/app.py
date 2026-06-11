@@ -92,6 +92,8 @@ if page == "My Crew":
                     'bounty'] > 0 else None,
             )
 
+            st.markdown("---")
+
             stat_order = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
             stats = char["stats"]
             cols = st.columns(6)
@@ -147,30 +149,28 @@ elif page == "Create Character":
     with col_b:
         race = race_map[chosen_race]
         bonuses = [
-            f"{k.capitalize()} +{v}" for k, v in race["bonuses"].items() if v > 0
+            f"{k.capitalize()} +{v}" if v > 0 else f"{k.capitalize()} {v}"
+            for k, v in race["bonuses"].items() if v != 0
         ]
-        st.info(f"**{race['name']}** — {race['description']}")
+        bonus_text = ", ".join(bonuses) if bonuses else "No bonuses"
+        st.info(f"**{race['name']}** — {race['description']}\n\n{bonus_text}")
 
     st.markdown("### Stats")
-
 
     race = race_map[chosen_race]
     cls = class_map[chosen_class]
     bonuses = {k: v for k, v in race["bonuses"].items() if v != 0}
-
-
 
     stat_names = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
     stat_values = {}
     cols = st.columns(6)
     for i, stat in enumerate(stat_names):
         with cols[i]:
-            default = st.session_state.get(f"stat_{stat}", 10)
             base = st.number_input(
                 stat.capitalize(),
                 min_value=1,
                 max_value=20,
-                value=default,
+                value=10,
                 key=f"input_{stat}",
             )
             stat_values[stat] = base
@@ -252,7 +252,8 @@ elif page == "Classes & Races":
                 with st.expander(race["name"]):
                     st.write(race["description"])
                     bonuses = [
-                        f"{k.capitalize()} +{v}" for k, v in race["bonuses"].items() if v > 0
+                        f"{k.capitalize()} +{v}" if v > 0 else f"{k.capitalize()} {v}"
+                        for k, v in race["bonuses"].items() if v != 0
                     ]
                     if bonuses:
                         st.success("Bonuses: " + " | ".join(bonuses))
