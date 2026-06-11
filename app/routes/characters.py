@@ -31,7 +31,7 @@ def roll_stats():
 
     Returns:
         JSON dict mapping each stat name to a rolled value
-        between 3 and 18.
+        between 3 and 18.Only for
     """
     rolls = _dice_roller.roll_stat_array()
     stat_names = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]

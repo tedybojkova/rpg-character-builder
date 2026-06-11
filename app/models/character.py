@@ -176,12 +176,12 @@ class Character(db.Model):
             "character_class": self.character_class.name,
             "race": self.race.name,
             "stats": {
-                "strength": {"base": self.strength, "modifier": self.strength_modifier},
-                "dexterity": {"base": self.dexterity, "modifier": self.dexterity_modifier},
-                "constitution": {"base": self.constitution, "modifier": self.constitution_modifier},
-                "intelligence": {"base": self.intelligence, "modifier": self.intelligence_modifier},
-                "wisdom": {"base": self.wisdom, "modifier": self.wisdom_modifier},
-                "charisma": {"base": self.charisma, "modifier": self.charisma_modifier},
+                "strength": {"base": self.strength, "total": self.strength + self.race.strength_bonus, "modifier": self.strength_modifier},
+                "dexterity": {"base": self.dexterity, "total": self.dexterity + self.race.dexterity_bonus, "modifier": self.dexterity_modifier},
+                "constitution": {"base": self.constitution, "total": self.constitution + self.race.constitution_bonus, "modifier": self.constitution_modifier},
+                "intelligence": {"base": self.intelligence, "total": self.intelligence + self.race.intelligence_bonus, "modifier": self.intelligence_modifier},
+                "wisdom": {"base": self.wisdom, "total": self.wisdom + self.race.wisdom_bonus, "modifier": self.wisdom_modifier},
+                "charisma": {"base": self.charisma, "total": self.charisma + self.race.charisma_bonus, "modifier": self.charisma_modifier},
             },
             "computed": {
                 "max_hit_points": self.max_hit_points,

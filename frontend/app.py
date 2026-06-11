@@ -97,10 +97,12 @@ if page == "My Crew":
             cols = st.columns(6)
             for i, stat_name in enumerate(stat_order):
                 values = stats[stat_name]
+                mod = values["modifier"]
+                mod_str = f"+{mod}" if mod >= 0 else str(mod)
                 cols[i].metric(
                     stat_name.capitalize(),
-                    values["base"],
-                    modifier_str(values["modifier"]),
+                    values["total"],
+                    mod_str,
                 )
 
             if char.get("backstory"):
